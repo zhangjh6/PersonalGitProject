@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jerry.frame.demo.dao.common.gds.GdsCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.jerry.frame.demo.model.common.gds.GdsCategory" >
+    <id column="CATG_CODE" property="catgCode" jdbcType="VARCHAR" />
+    <result column="ORIGIN_CATG_CODE" property="originCatgCode" jdbcType="VARCHAR" />
+    <result column="CATG_NAME" property="catgName" jdbcType="VARCHAR" />
+    <result column="CATG_LEVEL" property="catgLevel" jdbcType="DECIMAL" />
+    <result column="CATG_TYPE" property="catgType" jdbcType="VARCHAR" />
+    <result column="SORT_NO" property="sortNo" jdbcType="DECIMAL" />
+    <result column="CATG_PARENT" property="catgParent" jdbcType="VARCHAR" />
+    <result column="CATLOG_ID" property="catlogId" jdbcType="DECIMAL" />
+    <result column="IF_ENTITY_CODE" property="ifEntityCode" jdbcType="VARCHAR" />
+    <result column="IF_LEAF" property="ifLeaf" jdbcType="VARCHAR" />
+    <result column="CATG_URL" property="catgUrl" jdbcType="VARCHAR" />
+    <result column="CATG_TYPE_UNIT" property="catgTypeUnit" jdbcType="DECIMAL" />
+    <result column="MIN_PRICE" property="minPrice" jdbcType="DECIMAL" />
+    <result column="MAX_PRICE" property="maxPrice" jdbcType="DECIMAL" />
+    <result column="SHOP_ID" property="shopId" jdbcType="DECIMAL" />
+    <result column="MEDIA_UUID" property="mediaUuid" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="IF_SHOW" property="ifShow" jdbcType="VARCHAR" />
+    <result column="UPDATE_RULE" property="updateRule" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_STAFF" property="createStaff" jdbcType="DECIMAL" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_STAFF" property="updateStaff" jdbcType="DECIMAL" />
+    <result column="IF_ABLE_EDIT" property="ifAbleEdit" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CATG_CODE, ORIGIN_CATG_CODE, CATG_NAME, CATG_LEVEL, CATG_TYPE, SORT_NO, CATG_PARENT, 
+    CATLOG_ID, IF_ENTITY_CODE, IF_LEAF, CATG_URL, CATG_TYPE_UNIT, MIN_PRICE, MAX_PRICE, 
+    SHOP_ID, MEDIA_UUID, STATUS, IF_SHOW, UPDATE_RULE, CREATE_TIME, CREATE_STAFF, UPDATE_TIME, 
+    UPDATE_STAFF, IF_ABLE_EDIT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jerry.frame.demo.model.common.gds.GdsCategoryExample" >
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       select * from (select t_1.*,rownum as row_num from (
+    </if>
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_GDS_CATEGORY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       <![CDATA[ ) t_1 where rownum<=#{limitClauseCount,jdbcType=INTEGER} + #{limitClauseStart,jdbcType=INTEGER}) t_2 where t_2.row_num>#{limitClauseStart,jdbcType=INTEGER}]]>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_GDS_CATEGORY
+    where CATG_CODE = #{catgCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_GDS_CATEGORY
+    where CATG_CODE = #{catgCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jerry.frame.demo.model.common.gds.GdsCategoryExample" >
+    delete from T_GDS_CATEGORY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jerry.frame.demo.model.common.gds.GdsCategory" >
+    insert into T_GDS_CATEGORY (CATG_CODE, ORIGIN_CATG_CODE, CATG_NAME, 
+      CATG_LEVEL, CATG_TYPE, SORT_NO, 
+      CATG_PARENT, CATLOG_ID, IF_ENTITY_CODE, 
+      IF_LEAF, CATG_URL, CATG_TYPE_UNIT, 
+      MIN_PRICE, MAX_PRICE, SHOP_ID, 
+      MEDIA_UUID, STATUS, IF_SHOW, 
+      UPDATE_RULE, CREATE_TIME, CREATE_STAFF, 
+      UPDATE_TIME, UPDATE_STAFF, IF_ABLE_EDIT
+      )
+    values (#{catgCode,jdbcType=VARCHAR}, #{originCatgCode,jdbcType=VARCHAR}, #{catgName,jdbcType=VARCHAR}, 
+      #{catgLevel,jdbcType=DECIMAL}, #{catgType,jdbcType=VARCHAR}, #{sortNo,jdbcType=DECIMAL}, 
+      #{catgParent,jdbcType=VARCHAR}, #{catlogId,jdbcType=DECIMAL}, #{ifEntityCode,jdbcType=VARCHAR}, 
+      #{ifLeaf,jdbcType=VARCHAR}, #{catgUrl,jdbcType=VARCHAR}, #{catgTypeUnit,jdbcType=DECIMAL}, 
+      #{minPrice,jdbcType=DECIMAL}, #{maxPrice,jdbcType=DECIMAL}, #{shopId,jdbcType=DECIMAL}, 
+      #{mediaUuid,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{ifShow,jdbcType=VARCHAR}, 
+      #{updateRule,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createStaff,jdbcType=DECIMAL}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateStaff,jdbcType=DECIMAL}, #{ifAbleEdit,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jerry.frame.demo.model.common.gds.GdsCategory" >
+    insert into T_GDS_CATEGORY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="catgCode != null" >
+        CATG_CODE,
+      </if>
+      <if test="originCatgCode != null" >
+        ORIGIN_CATG_CODE,
+      </if>
+      <if test="catgName != null" >
+        CATG_NAME,
+      </if>
+      <if test="catgLevel != null" >
+        CATG_LEVEL,
+      </if>
+      <if test="catgType != null" >
+        CATG_TYPE,
+      </if>
+      <if test="sortNo != null" >
+        SORT_NO,
+      </if>
+      <if test="catgParent != null" >
+        CATG_PARENT,
+      </if>
+      <if test="catlogId != null" >
+        CATLOG_ID,
+      </if>
+      <if test="ifEntityCode != null" >
+        IF_ENTITY_CODE,
+      </if>
+      <if test="ifLeaf != null" >
+        IF_LEAF,
+      </if>
+      <if test="catgUrl != null" >
+        CATG_URL,
+      </if>
+      <if test="catgTypeUnit != null" >
+        CATG_TYPE_UNIT,
+      </if>
+      <if test="minPrice != null" >
+        MIN_PRICE,
+      </if>
+      <if test="maxPrice != null" >
+        MAX_PRICE,
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID,
+      </if>
+      <if test="mediaUuid != null" >
+        MEDIA_UUID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="ifShow != null" >
+        IF_SHOW,
+      </if>
+      <if test="updateRule != null" >
+        UPDATE_RULE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createStaff != null" >
+        CREATE_STAFF,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="updateStaff != null" >
+        UPDATE_STAFF,
+      </if>
+      <if test="ifAbleEdit != null" >
+        IF_ABLE_EDIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="catgCode != null" >
+        #{catgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="originCatgCode != null" >
+        #{originCatgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="catgName != null" >
+        #{catgName,jdbcType=VARCHAR},
+      </if>
+      <if test="catgLevel != null" >
+        #{catgLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="catgType != null" >
+        #{catgType,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNo != null" >
+        #{sortNo,jdbcType=DECIMAL},
+      </if>
+      <if test="catgParent != null" >
+        #{catgParent,jdbcType=VARCHAR},
+      </if>
+      <if test="catlogId != null" >
+        #{catlogId,jdbcType=DECIMAL},
+      </if>
+      <if test="ifEntityCode != null" >
+        #{ifEntityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ifLeaf != null" >
+        #{ifLeaf,jdbcType=VARCHAR},
+      </if>
+      <if test="catgUrl != null" >
+        #{catgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="catgTypeUnit != null" >
+        #{catgTypeUnit,jdbcType=DECIMAL},
+      </if>
+      <if test="minPrice != null" >
+        #{minPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="maxPrice != null" >
+        #{maxPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="mediaUuid != null" >
+        #{mediaUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="ifShow != null" >
+        #{ifShow,jdbcType=VARCHAR},
+      </if>
+      <if test="updateRule != null" >
+        #{updateRule,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null" >
+        #{createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null" >
+        #{updateStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="ifAbleEdit != null" >
+        #{ifAbleEdit,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jerry.frame.demo.model.common.gds.GdsCategoryExample" resultType="java.lang.Integer" >
+    select count(*) from T_GDS_CATEGORY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_GDS_CATEGORY
+    <set >
+      <if test="record.catgCode != null" >
+        CATG_CODE = #{record.catgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originCatgCode != null" >
+        ORIGIN_CATG_CODE = #{record.originCatgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catgName != null" >
+        CATG_NAME = #{record.catgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catgLevel != null" >
+        CATG_LEVEL = #{record.catgLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="record.catgType != null" >
+        CATG_TYPE = #{record.catgType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortNo != null" >
+        SORT_NO = #{record.sortNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.catgParent != null" >
+        CATG_PARENT = #{record.catgParent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catlogId != null" >
+        CATLOG_ID = #{record.catlogId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ifEntityCode != null" >
+        IF_ENTITY_CODE = #{record.ifEntityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifLeaf != null" >
+        IF_LEAF = #{record.ifLeaf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catgUrl != null" >
+        CATG_URL = #{record.catgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catgTypeUnit != null" >
+        CATG_TYPE_UNIT = #{record.catgTypeUnit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.minPrice != null" >
+        MIN_PRICE = #{record.minPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.maxPrice != null" >
+        MAX_PRICE = #{record.maxPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shopId != null" >
+        SHOP_ID = #{record.shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mediaUuid != null" >
+        MEDIA_UUID = #{record.mediaUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifShow != null" >
+        IF_SHOW = #{record.ifShow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateRule != null" >
+        UPDATE_RULE = #{record.updateRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createStaff != null" >
+        CREATE_STAFF = #{record.createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateStaff != null" >
+        UPDATE_STAFF = #{record.updateStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ifAbleEdit != null" >
+        IF_ABLE_EDIT = #{record.ifAbleEdit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_GDS_CATEGORY
+    set CATG_CODE = #{record.catgCode,jdbcType=VARCHAR},
+      ORIGIN_CATG_CODE = #{record.originCatgCode,jdbcType=VARCHAR},
+      CATG_NAME = #{record.catgName,jdbcType=VARCHAR},
+      CATG_LEVEL = #{record.catgLevel,jdbcType=DECIMAL},
+      CATG_TYPE = #{record.catgType,jdbcType=VARCHAR},
+      SORT_NO = #{record.sortNo,jdbcType=DECIMAL},
+      CATG_PARENT = #{record.catgParent,jdbcType=VARCHAR},
+      CATLOG_ID = #{record.catlogId,jdbcType=DECIMAL},
+      IF_ENTITY_CODE = #{record.ifEntityCode,jdbcType=VARCHAR},
+      IF_LEAF = #{record.ifLeaf,jdbcType=VARCHAR},
+      CATG_URL = #{record.catgUrl,jdbcType=VARCHAR},
+      CATG_TYPE_UNIT = #{record.catgTypeUnit,jdbcType=DECIMAL},
+      MIN_PRICE = #{record.minPrice,jdbcType=DECIMAL},
+      MAX_PRICE = #{record.maxPrice,jdbcType=DECIMAL},
+      SHOP_ID = #{record.shopId,jdbcType=DECIMAL},
+      MEDIA_UUID = #{record.mediaUuid,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      IF_SHOW = #{record.ifShow,jdbcType=VARCHAR},
+      UPDATE_RULE = #{record.updateRule,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_STAFF = #{record.createStaff,jdbcType=DECIMAL},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      UPDATE_STAFF = #{record.updateStaff,jdbcType=DECIMAL},
+      IF_ABLE_EDIT = #{record.ifAbleEdit,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jerry.frame.demo.model.common.gds.GdsCategory" >
+    update T_GDS_CATEGORY
+    <set >
+      <if test="originCatgCode != null" >
+        ORIGIN_CATG_CODE = #{originCatgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="catgName != null" >
+        CATG_NAME = #{catgName,jdbcType=VARCHAR},
+      </if>
+      <if test="catgLevel != null" >
+        CATG_LEVEL = #{catgLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="catgType != null" >
+        CATG_TYPE = #{catgType,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNo != null" >
+        SORT_NO = #{sortNo,jdbcType=DECIMAL},
+      </if>
+      <if test="catgParent != null" >
+        CATG_PARENT = #{catgParent,jdbcType=VARCHAR},
+      </if>
+      <if test="catlogId != null" >
+        CATLOG_ID = #{catlogId,jdbcType=DECIMAL},
+      </if>
+      <if test="ifEntityCode != null" >
+        IF_ENTITY_CODE = #{ifEntityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ifLeaf != null" >
+        IF_LEAF = #{ifLeaf,jdbcType=VARCHAR},
+      </if>
+      <if test="catgUrl != null" >
+        CATG_URL = #{catgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="catgTypeUnit != null" >
+        CATG_TYPE_UNIT = #{catgTypeUnit,jdbcType=DECIMAL},
+      </if>
+      <if test="minPrice != null" >
+        MIN_PRICE = #{minPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="maxPrice != null" >
+        MAX_PRICE = #{maxPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID = #{shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="mediaUuid != null" >
+        MEDIA_UUID = #{mediaUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="ifShow != null" >
+        IF_SHOW = #{ifShow,jdbcType=VARCHAR},
+      </if>
+      <if test="updateRule != null" >
+        UPDATE_RULE = #{updateRule,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null" >
+        CREATE_STAFF = #{createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null" >
+        UPDATE_STAFF = #{updateStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="ifAbleEdit != null" >
+        IF_ABLE_EDIT = #{ifAbleEdit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CATG_CODE = #{catgCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jerry.frame.demo.model.common.gds.GdsCategory" >
+    update T_GDS_CATEGORY
+    set ORIGIN_CATG_CODE = #{originCatgCode,jdbcType=VARCHAR},
+      CATG_NAME = #{catgName,jdbcType=VARCHAR},
+      CATG_LEVEL = #{catgLevel,jdbcType=DECIMAL},
+      CATG_TYPE = #{catgType,jdbcType=VARCHAR},
+      SORT_NO = #{sortNo,jdbcType=DECIMAL},
+      CATG_PARENT = #{catgParent,jdbcType=VARCHAR},
+      CATLOG_ID = #{catlogId,jdbcType=DECIMAL},
+      IF_ENTITY_CODE = #{ifEntityCode,jdbcType=VARCHAR},
+      IF_LEAF = #{ifLeaf,jdbcType=VARCHAR},
+      CATG_URL = #{catgUrl,jdbcType=VARCHAR},
+      CATG_TYPE_UNIT = #{catgTypeUnit,jdbcType=DECIMAL},
+      MIN_PRICE = #{minPrice,jdbcType=DECIMAL},
+      MAX_PRICE = #{maxPrice,jdbcType=DECIMAL},
+      SHOP_ID = #{shopId,jdbcType=DECIMAL},
+      MEDIA_UUID = #{mediaUuid,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      IF_SHOW = #{ifShow,jdbcType=VARCHAR},
+      UPDATE_RULE = #{updateRule,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_STAFF = #{createStaff,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_STAFF = #{updateStaff,jdbcType=DECIMAL},
+      IF_ABLE_EDIT = #{ifAbleEdit,jdbcType=VARCHAR}
+    where CATG_CODE = #{catgCode,jdbcType=VARCHAR}
+  </update>
+  <insert id="insertBatch" parameterType="com.jerry.frame.demo.model.common.gds.GdsCategory" >
+    insert into T_GDS_CATEGORY (CATG_CODE, 
+      ORIGIN_CATG_CODE, CATG_NAME, CATG_LEVEL, 
+      CATG_TYPE, SORT_NO, CATG_PARENT, 
+      CATLOG_ID, IF_ENTITY_CODE, IF_LEAF, 
+      CATG_URL, CATG_TYPE_UNIT, MIN_PRICE, 
+      MAX_PRICE, SHOP_ID, MEDIA_UUID, 
+      STATUS, IF_SHOW, UPDATE_RULE, 
+      CREATE_TIME, CREATE_STAFF, UPDATE_TIME, 
+      UPDATE_STAFF, IF_ABLE_EDIT)
+    values <foreach collection="list" item="item" index="index" separator="," > (#{item.catgCode,jdbcType=VARCHAR}, 
+      #{item.originCatgCode,jdbcType=VARCHAR}, #{item.catgName,jdbcType=VARCHAR}, #{item.catgLevel,jdbcType=DECIMAL}, 
+      #{item.catgType,jdbcType=VARCHAR}, #{item.sortNo,jdbcType=DECIMAL}, #{item.catgParent,jdbcType=VARCHAR}, 
+      #{item.catlogId,jdbcType=DECIMAL}, #{item.ifEntityCode,jdbcType=VARCHAR}, #{item.ifLeaf,jdbcType=VARCHAR}, 
+      #{item.catgUrl,jdbcType=VARCHAR}, #{item.catgTypeUnit,jdbcType=DECIMAL}, #{item.minPrice,jdbcType=DECIMAL}, 
+      #{item.maxPrice,jdbcType=DECIMAL}, #{item.shopId,jdbcType=DECIMAL}, #{item.mediaUuid,jdbcType=VARCHAR}, 
+      #{item.status,jdbcType=VARCHAR}, #{item.ifShow,jdbcType=VARCHAR}, #{item.updateRule,jdbcType=VARCHAR}, 
+      #{item.createTime,jdbcType=TIMESTAMP}, #{item.createStaff,jdbcType=DECIMAL}, #{item.updateTime,jdbcType=TIMESTAMP}, 
+      #{item.updateStaff,jdbcType=DECIMAL}, #{item.ifAbleEdit,jdbcType=VARCHAR})</foreach>
+  </insert>
+</mapper>

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jerry.frame.demo.dao.common.gds.GdsSku2PropMapper" >
+  <resultMap id="BaseResultMap" type="com.jerry.frame.demo.model.common.gds.GdsSku2Prop" >
+    <result column="SKU_ID" property="skuId" jdbcType="DECIMAL" />
+    <result column="GDS_ID" property="gdsId" jdbcType="DECIMAL" />
+    <result column="PROP_ID" property="propId" jdbcType="DECIMAL" />
+    <result column="SHOP_ID" property="shopId" jdbcType="DECIMAL" />
+    <result column="PROP_NAME" property="propName" jdbcType="VARCHAR" />
+    <result column="PROP_VALUE_ID" property="propValueId" jdbcType="DECIMAL" />
+    <result column="PROP_VALUE" property="propValue" jdbcType="VARCHAR" />
+    <result column="PROP_TYPE" property="propType" jdbcType="VARCHAR" />
+    <result column="PROP_VALUE_TYPE" property="propValueType" jdbcType="VARCHAR" />
+    <result column="PROP_INPUT_TYPE" property="propInputType" jdbcType="VARCHAR" />
+    <result column="PROP_INPUT_RULE" property="propInputRule" jdbcType="VARCHAR" />
+    <result column="PROP_MEDIA_UUID" property="propMediaUuid" jdbcType="VARCHAR" />
+    <result column="IF_HAVETO" property="ifHaveto" jdbcType="VARCHAR" />
+    <result column="IF_CHECK" property="ifCheck" jdbcType="VARCHAR" />
+    <result column="IF_BASIC" property="ifBasic" jdbcType="VARCHAR" />
+    <result column="GDS_STATUS" property="gdsStatus" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_STAFF" property="createStaff" jdbcType="DECIMAL" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_STAFF" property="updateStaff" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SKU_ID, GDS_ID, PROP_ID, SHOP_ID, PROP_NAME, PROP_VALUE_ID, PROP_VALUE, PROP_TYPE, 
+    PROP_VALUE_TYPE, PROP_INPUT_TYPE, PROP_INPUT_RULE, PROP_MEDIA_UUID, IF_HAVETO, IF_CHECK, 
+    IF_BASIC, GDS_STATUS, STATUS, CREATE_TIME, CREATE_STAFF, UPDATE_TIME, UPDATE_STAFF
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jerry.frame.demo.model.common.gds.GdsSku2PropExample" >
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       select * from (select t_1.*,rownum as row_num from (
+    </if>
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_GDS_SKU2PROP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       <![CDATA[ ) t_1 where rownum<=#{limitClauseCount,jdbcType=INTEGER} + #{limitClauseStart,jdbcType=INTEGER}) t_2 where t_2.row_num>#{limitClauseStart,jdbcType=INTEGER}]]>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jerry.frame.demo.model.common.gds.GdsSku2PropExample" >
+    delete from T_GDS_SKU2PROP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jerry.frame.demo.model.common.gds.GdsSku2Prop" >
+    insert into T_GDS_SKU2PROP (SKU_ID, GDS_ID, PROP_ID, 
+      SHOP_ID, PROP_NAME, PROP_VALUE_ID, 
+      PROP_VALUE, PROP_TYPE, PROP_VALUE_TYPE, 
+      PROP_INPUT_TYPE, PROP_INPUT_RULE, PROP_MEDIA_UUID, 
+      IF_HAVETO, IF_CHECK, IF_BASIC, 
+      GDS_STATUS, STATUS, CREATE_TIME, 
+      CREATE_STAFF, UPDATE_TIME, UPDATE_STAFF
+      )
+    values (#{skuId,jdbcType=DECIMAL}, #{gdsId,jdbcType=DECIMAL}, #{propId,jdbcType=DECIMAL}, 
+      #{shopId,jdbcType=DECIMAL}, #{propName,jdbcType=VARCHAR}, #{propValueId,jdbcType=DECIMAL}, 
+      #{propValue,jdbcType=VARCHAR}, #{propType,jdbcType=VARCHAR}, #{propValueType,jdbcType=VARCHAR}, 
+      #{propInputType,jdbcType=VARCHAR}, #{propInputRule,jdbcType=VARCHAR}, #{propMediaUuid,jdbcType=VARCHAR}, 
+      #{ifHaveto,jdbcType=VARCHAR}, #{ifCheck,jdbcType=VARCHAR}, #{ifBasic,jdbcType=VARCHAR}, 
+      #{gdsStatus,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createStaff,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP}, #{updateStaff,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jerry.frame.demo.model.common.gds.GdsSku2Prop" >
+    insert into T_GDS_SKU2PROP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="skuId != null" >
+        SKU_ID,
+      </if>
+      <if test="gdsId != null" >
+        GDS_ID,
+      </if>
+      <if test="propId != null" >
+        PROP_ID,
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID,
+      </if>
+      <if test="propName != null" >
+        PROP_NAME,
+      </if>
+      <if test="propValueId != null" >
+        PROP_VALUE_ID,
+      </if>
+      <if test="propValue != null" >
+        PROP_VALUE,
+      </if>
+      <if test="propType != null" >
+        PROP_TYPE,
+      </if>
+      <if test="propValueType != null" >
+        PROP_VALUE_TYPE,
+      </if>
+      <if test="propInputType != null" >
+        PROP_INPUT_TYPE,
+      </if>
+      <if test="propInputRule != null" >
+        PROP_INPUT_RULE,
+      </if>
+      <if test="propMediaUuid != null" >
+        PROP_MEDIA_UUID,
+      </if>
+      <if test="ifHaveto != null" >
+        IF_HAVETO,
+      </if>
+      <if test="ifCheck != null" >
+        IF_CHECK,
+      </if>
+      <if test="ifBasic != null" >
+        IF_BASIC,
+      </if>
+      <if test="gdsStatus != null" >
+        GDS_STATUS,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createStaff != null" >
+        CREATE_STAFF,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="updateStaff != null" >
+        UPDATE_STAFF,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="skuId != null" >
+        #{skuId,jdbcType=DECIMAL},
+      </if>
+      <if test="gdsId != null" >
+        #{gdsId,jdbcType=DECIMAL},
+      </if>
+      <if test="propId != null" >
+        #{propId,jdbcType=DECIMAL},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="propName != null" >
+        #{propName,jdbcType=VARCHAR},
+      </if>
+      <if test="propValueId != null" >
+        #{propValueId,jdbcType=DECIMAL},
+      </if>
+      <if test="propValue != null" >
+        #{propValue,jdbcType=VARCHAR},
+      </if>
+      <if test="propType != null" >
+        #{propType,jdbcType=VARCHAR},
+      </if>
+      <if test="propValueType != null" >
+        #{propValueType,jdbcType=VARCHAR},
+      </if>
+      <if test="propInputType != null" >
+        #{propInputType,jdbcType=VARCHAR},
+      </if>
+      <if test="propInputRule != null" >
+        #{propInputRule,jdbcType=VARCHAR},
+      </if>
+      <if test="propMediaUuid != null" >
+        #{propMediaUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="ifHaveto != null" >
+        #{ifHaveto,jdbcType=VARCHAR},
+      </if>
+      <if test="ifCheck != null" >
+        #{ifCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="ifBasic != null" >
+        #{ifBasic,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsStatus != null" >
+        #{gdsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null" >
+        #{createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null" >
+        #{updateStaff,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jerry.frame.demo.model.common.gds.GdsSku2PropExample" resultType="java.lang.Integer" >
+    select count(*) from T_GDS_SKU2PROP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_GDS_SKU2PROP
+    <set >
+      <if test="record.skuId != null" >
+        SKU_ID = #{record.skuId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gdsId != null" >
+        GDS_ID = #{record.gdsId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.propId != null" >
+        PROP_ID = #{record.propId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shopId != null" >
+        SHOP_ID = #{record.shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.propName != null" >
+        PROP_NAME = #{record.propName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.propValueId != null" >
+        PROP_VALUE_ID = #{record.propValueId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.propValue != null" >
+        PROP_VALUE = #{record.propValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.propType != null" >
+        PROP_TYPE = #{record.propType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.propValueType != null" >
+        PROP_VALUE_TYPE = #{record.propValueType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.propInputType != null" >
+        PROP_INPUT_TYPE = #{record.propInputType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.propInputRule != null" >
+        PROP_INPUT_RULE = #{record.propInputRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.propMediaUuid != null" >
+        PROP_MEDIA_UUID = #{record.propMediaUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifHaveto != null" >
+        IF_HAVETO = #{record.ifHaveto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifCheck != null" >
+        IF_CHECK = #{record.ifCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifBasic != null" >
+        IF_BASIC = #{record.ifBasic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdsStatus != null" >
+        GDS_STATUS = #{record.gdsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createStaff != null" >
+        CREATE_STAFF = #{record.createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateStaff != null" >
+        UPDATE_STAFF = #{record.updateStaff,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_GDS_SKU2PROP
+    set SKU_ID = #{record.skuId,jdbcType=DECIMAL},
+      GDS_ID = #{record.gdsId,jdbcType=DECIMAL},
+      PROP_ID = #{record.propId,jdbcType=DECIMAL},
+      SHOP_ID = #{record.shopId,jdbcType=DECIMAL},
+      PROP_NAME = #{record.propName,jdbcType=VARCHAR},
+      PROP_VALUE_ID = #{record.propValueId,jdbcType=DECIMAL},
+      PROP_VALUE = #{record.propValue,jdbcType=VARCHAR},
+      PROP_TYPE = #{record.propType,jdbcType=VARCHAR},
+      PROP_VALUE_TYPE = #{record.propValueType,jdbcType=VARCHAR},
+      PROP_INPUT_TYPE = #{record.propInputType,jdbcType=VARCHAR},
+      PROP_INPUT_RULE = #{record.propInputRule,jdbcType=VARCHAR},
+      PROP_MEDIA_UUID = #{record.propMediaUuid,jdbcType=VARCHAR},
+      IF_HAVETO = #{record.ifHaveto,jdbcType=VARCHAR},
+      IF_CHECK = #{record.ifCheck,jdbcType=VARCHAR},
+      IF_BASIC = #{record.ifBasic,jdbcType=VARCHAR},
+      GDS_STATUS = #{record.gdsStatus,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_STAFF = #{record.createStaff,jdbcType=DECIMAL},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      UPDATE_STAFF = #{record.updateStaff,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <insert id="insertBatch" parameterType="com.jerry.frame.demo.model.common.gds.GdsSku2Prop" >
+    insert into T_GDS_SKU2PROP (SKU_ID, 
+      GDS_ID, PROP_ID, SHOP_ID, 
+      PROP_NAME, PROP_VALUE_ID, PROP_VALUE, 
+      PROP_TYPE, PROP_VALUE_TYPE, PROP_INPUT_TYPE, 
+      PROP_INPUT_RULE, PROP_MEDIA_UUID, 
+      IF_HAVETO, IF_CHECK, IF_BASIC, 
+      GDS_STATUS, STATUS, CREATE_TIME, 
+      CREATE_STAFF, UPDATE_TIME, UPDATE_STAFF
+      )
+    values <foreach collection="list" item="item" index="index" separator="," > (#{item.skuId,jdbcType=DECIMAL}, 
+      #{item.gdsId,jdbcType=DECIMAL}, #{item.propId,jdbcType=DECIMAL}, #{item.shopId,jdbcType=DECIMAL}, 
+      #{item.propName,jdbcType=VARCHAR}, #{item.propValueId,jdbcType=DECIMAL}, #{item.propValue,jdbcType=VARCHAR}, 
+      #{item.propType,jdbcType=VARCHAR}, #{item.propValueType,jdbcType=VARCHAR}, #{item.propInputType,jdbcType=VARCHAR}, 
+      #{item.propInputRule,jdbcType=VARCHAR}, #{item.propMediaUuid,jdbcType=VARCHAR}, 
+      #{item.ifHaveto,jdbcType=VARCHAR}, #{item.ifCheck,jdbcType=VARCHAR}, #{item.ifBasic,jdbcType=VARCHAR}, 
+      #{item.gdsStatus,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
+      #{item.createStaff,jdbcType=DECIMAL}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateStaff,jdbcType=DECIMAL}
+      )</foreach>
+  </insert>
+</mapper>

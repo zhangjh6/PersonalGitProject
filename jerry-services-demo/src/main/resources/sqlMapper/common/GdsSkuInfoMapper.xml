@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jerry.frame.demo.dao.common.gds.GdsSkuInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.jerry.frame.demo.model.common.gds.GdsSkuInfo" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SNAP_ID" property="snapId" jdbcType="DECIMAL" />
+    <result column="SKU_PROPS" property="skuProps" jdbcType="VARCHAR" />
+    <result column="GDS_ID" property="gdsId" jdbcType="DECIMAL" />
+    <result column="GDS_NAME" property="gdsName" jdbcType="VARCHAR" />
+    <result column="GDS_SUB_HEAD" property="gdsSubHead" jdbcType="VARCHAR" />
+    <result column="SKU_PRICE" property="skuPrice" jdbcType="DECIMAL" />
+    <result column="GUIDE_PRICE" property="guidePrice" jdbcType="DECIMAL" />
+    <result column="GDS_DESC" property="gdsDesc" jdbcType="VARCHAR" />
+    <result column="GDS_PARTLIST" property="gdsPartlist" jdbcType="VARCHAR" />
+    <result column="GDS_TYPE_ID" property="gdsTypeId" jdbcType="DECIMAL" />
+    <result column="GDS_STATUS" property="gdsStatus" jdbcType="VARCHAR" />
+    <result column="GDS_APPROVE" property="gdsApprove" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="SORT_NO" property="sortNo" jdbcType="DECIMAL" />
+    <result column="SHOP_ID" property="shopId" jdbcType="DECIMAL" />
+    <result column="TAX_ID" property="taxId" jdbcType="DECIMAL" />
+    <result column="GDS_LABEL" property="gdsLabel" jdbcType="VARCHAR" />
+    <result column="PUTON_TIME" property="putonTime" jdbcType="TIMESTAMP" />
+    <result column="PUTOFF_TIME" property="putoffTime" jdbcType="TIMESTAMP" />
+    <result column="POST_TIME" property="postTime" jdbcType="DECIMAL" />
+    <result column="IF_SENDSCORE" property="ifSendscore" jdbcType="VARCHAR" />
+    <result column="IF_SALEALONE" property="ifSalealone" jdbcType="VARCHAR" />
+    <result column="IF_RECOMM" property="ifRecomm" jdbcType="VARCHAR" />
+    <result column="IF_NEW" property="ifNew" jdbcType="VARCHAR" />
+    <result column="IF_STOCKNOTICE" property="ifStocknotice" jdbcType="VARCHAR" />
+    <result column="IF_FREE" property="ifFree" jdbcType="VARCHAR" />
+    <result column="IF_DISPERSE_STOCK" property="ifDisperseStock" jdbcType="VARCHAR" />
+    <result column="IF_LADDER_PRICE" property="ifLadderPrice" jdbcType="VARCHAR" />
+    <result column="IF_ENTITY_CODE" property="ifEntityCode" jdbcType="VARCHAR" />
+    <result column="IF_SENIOR_PRICE" property="ifSeniorPrice" jdbcType="VARCHAR" />
+    <result column="IF_SCORE_GDS" property="ifScoreGds" jdbcType="VARCHAR" />
+    <result column="SHIP_TEMPLATE_ID" property="shipTemplateId" jdbcType="DECIMAL" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="DECIMAL" />
+    <result column="PLAT_CATGS" property="platCatgs" jdbcType="VARCHAR" />
+    <result column="SHOP_CATGS" property="shopCatgs" jdbcType="VARCHAR" />
+    <result column="MAIN_CATGS" property="mainCatgs" jdbcType="VARCHAR" />
+    <result column="CATLOG_ID" property="catlogId" jdbcType="DECIMAL" />
+    <result column="ISBN" property="isbn" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_STAFF" property="createStaff" jdbcType="DECIMAL" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_STAFF" property="updateStaff" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SNAP_ID, SKU_PROPS, GDS_ID, GDS_NAME, GDS_SUB_HEAD, SKU_PRICE, GUIDE_PRICE, GDS_DESC, 
+    GDS_PARTLIST, GDS_TYPE_ID, GDS_STATUS, GDS_APPROVE, URL, SORT_NO, SHOP_ID, TAX_ID, 
+    GDS_LABEL, PUTON_TIME, PUTOFF_TIME, POST_TIME, IF_SENDSCORE, IF_SALEALONE, IF_RECOMM, 
+    IF_NEW, IF_STOCKNOTICE, IF_FREE, IF_DISPERSE_STOCK, IF_LADDER_PRICE, IF_ENTITY_CODE, 
+    IF_SENIOR_PRICE, IF_SCORE_GDS, SHIP_TEMPLATE_ID, SUPPLIER_ID, PLAT_CATGS, SHOP_CATGS, 
+    MAIN_CATGS, CATLOG_ID, ISBN, CREATE_TIME, CREATE_STAFF, UPDATE_TIME, UPDATE_STAFF
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jerry.frame.demo.model.common.gds.GdsSkuInfoExample" >
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       select * from (select t_1.*,rownum as row_num from (
+    </if>
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_GDS_SKU_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       <![CDATA[ ) t_1 where rownum<=#{limitClauseCount,jdbcType=INTEGER} + #{limitClauseStart,jdbcType=INTEGER}) t_2 where t_2.row_num>#{limitClauseStart,jdbcType=INTEGER}]]>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_GDS_SKU_INFO
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_GDS_SKU_INFO
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jerry.frame.demo.model.common.gds.GdsSkuInfoExample" >
+    delete from T_GDS_SKU_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jerry.frame.demo.model.common.gds.GdsSkuInfo" >
+    insert into T_GDS_SKU_INFO (ID, SNAP_ID, SKU_PROPS, 
+      GDS_ID, GDS_NAME, GDS_SUB_HEAD, 
+      SKU_PRICE, GUIDE_PRICE, GDS_DESC, 
+      GDS_PARTLIST, GDS_TYPE_ID, GDS_STATUS, 
+      GDS_APPROVE, URL, SORT_NO, 
+      SHOP_ID, TAX_ID, GDS_LABEL, 
+      PUTON_TIME, PUTOFF_TIME, POST_TIME, 
+      IF_SENDSCORE, IF_SALEALONE, IF_RECOMM, 
+      IF_NEW, IF_STOCKNOTICE, IF_FREE, 
+      IF_DISPERSE_STOCK, IF_LADDER_PRICE, IF_ENTITY_CODE, 
+      IF_SENIOR_PRICE, IF_SCORE_GDS, SHIP_TEMPLATE_ID, 
+      SUPPLIER_ID, PLAT_CATGS, SHOP_CATGS, 
+      MAIN_CATGS, CATLOG_ID, ISBN, 
+      CREATE_TIME, CREATE_STAFF, UPDATE_TIME, 
+      UPDATE_STAFF)
+    values (#{id,jdbcType=DECIMAL}, #{snapId,jdbcType=DECIMAL}, #{skuProps,jdbcType=VARCHAR}, 
+      #{gdsId,jdbcType=DECIMAL}, #{gdsName,jdbcType=VARCHAR}, #{gdsSubHead,jdbcType=VARCHAR}, 
+      #{skuPrice,jdbcType=DECIMAL}, #{guidePrice,jdbcType=DECIMAL}, #{gdsDesc,jdbcType=VARCHAR}, 
+      #{gdsPartlist,jdbcType=VARCHAR}, #{gdsTypeId,jdbcType=DECIMAL}, #{gdsStatus,jdbcType=VARCHAR}, 
+      #{gdsApprove,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{sortNo,jdbcType=DECIMAL}, 
+      #{shopId,jdbcType=DECIMAL}, #{taxId,jdbcType=DECIMAL}, #{gdsLabel,jdbcType=VARCHAR}, 
+      #{putonTime,jdbcType=TIMESTAMP}, #{putoffTime,jdbcType=TIMESTAMP}, #{postTime,jdbcType=DECIMAL}, 
+      #{ifSendscore,jdbcType=VARCHAR}, #{ifSalealone,jdbcType=VARCHAR}, #{ifRecomm,jdbcType=VARCHAR}, 
+      #{ifNew,jdbcType=VARCHAR}, #{ifStocknotice,jdbcType=VARCHAR}, #{ifFree,jdbcType=VARCHAR}, 
+      #{ifDisperseStock,jdbcType=VARCHAR}, #{ifLadderPrice,jdbcType=VARCHAR}, #{ifEntityCode,jdbcType=VARCHAR}, 
+      #{ifSeniorPrice,jdbcType=VARCHAR}, #{ifScoreGds,jdbcType=VARCHAR}, #{shipTemplateId,jdbcType=DECIMAL}, 
+      #{supplierId,jdbcType=DECIMAL}, #{platCatgs,jdbcType=VARCHAR}, #{shopCatgs,jdbcType=VARCHAR}, 
+      #{mainCatgs,jdbcType=VARCHAR}, #{catlogId,jdbcType=DECIMAL}, #{isbn,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createStaff,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateStaff,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jerry.frame.demo.model.common.gds.GdsSkuInfo" >
+    insert into T_GDS_SKU_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="snapId != null" >
+        SNAP_ID,
+      </if>
+      <if test="skuProps != null" >
+        SKU_PROPS,
+      </if>
+      <if test="gdsId != null" >
+        GDS_ID,
+      </if>
+      <if test="gdsName != null" >
+        GDS_NAME,
+      </if>
+      <if test="gdsSubHead != null" >
+        GDS_SUB_HEAD,
+      </if>
+      <if test="skuPrice != null" >
+        SKU_PRICE,
+      </if>
+      <if test="guidePrice != null" >
+        GUIDE_PRICE,
+      </if>
+      <if test="gdsDesc != null" >
+        GDS_DESC,
+      </if>
+      <if test="gdsPartlist != null" >
+        GDS_PARTLIST,
+      </if>
+      <if test="gdsTypeId != null" >
+        GDS_TYPE_ID,
+      </if>
+      <if test="gdsStatus != null" >
+        GDS_STATUS,
+      </if>
+      <if test="gdsApprove != null" >
+        GDS_APPROVE,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="sortNo != null" >
+        SORT_NO,
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID,
+      </if>
+      <if test="taxId != null" >
+        TAX_ID,
+      </if>
+      <if test="gdsLabel != null" >
+        GDS_LABEL,
+      </if>
+      <if test="putonTime != null" >
+        PUTON_TIME,
+      </if>
+      <if test="putoffTime != null" >
+        PUTOFF_TIME,
+      </if>
+      <if test="postTime != null" >
+        POST_TIME,
+      </if>
+      <if test="ifSendscore != null" >
+        IF_SENDSCORE,
+      </if>
+      <if test="ifSalealone != null" >
+        IF_SALEALONE,
+      </if>
+      <if test="ifRecomm != null" >
+        IF_RECOMM,
+      </if>
+      <if test="ifNew != null" >
+        IF_NEW,
+      </if>
+      <if test="ifStocknotice != null" >
+        IF_STOCKNOTICE,
+      </if>
+      <if test="ifFree != null" >
+        IF_FREE,
+      </if>
+      <if test="ifDisperseStock != null" >
+        IF_DISPERSE_STOCK,
+      </if>
+      <if test="ifLadderPrice != null" >
+        IF_LADDER_PRICE,
+      </if>
+      <if test="ifEntityCode != null" >
+        IF_ENTITY_CODE,
+      </if>
+      <if test="ifSeniorPrice != null" >
+        IF_SENIOR_PRICE,
+      </if>
+      <if test="ifScoreGds != null" >
+        IF_SCORE_GDS,
+      </if>
+      <if test="shipTemplateId != null" >
+        SHIP_TEMPLATE_ID,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="platCatgs != null" >
+        PLAT_CATGS,
+      </if>
+      <if test="shopCatgs != null" >
+        SHOP_CATGS,
+      </if>
+      <if test="mainCatgs != null" >
+        MAIN_CATGS,
+      </if>
+      <if test="catlogId != null" >
+        CATLOG_ID,
+      </if>
+      <if test="isbn != null" >
+        ISBN,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createStaff != null" >
+        CREATE_STAFF,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="updateStaff != null" >
+        UPDATE_STAFF,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="snapId != null" >
+        #{snapId,jdbcType=DECIMAL},
+      </if>
+      <if test="skuProps != null" >
+        #{skuProps,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsId != null" >
+        #{gdsId,jdbcType=DECIMAL},
+      </if>
+      <if test="gdsName != null" >
+        #{gdsName,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsSubHead != null" >
+        #{gdsSubHead,jdbcType=VARCHAR},
+      </if>
+      <if test="skuPrice != null" >
+        #{skuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="guidePrice != null" >
+        #{guidePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="gdsDesc != null" >
+        #{gdsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsPartlist != null" >
+        #{gdsPartlist,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsTypeId != null" >
+        #{gdsTypeId,jdbcType=DECIMAL},
+      </if>
+      <if test="gdsStatus != null" >
+        #{gdsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsApprove != null" >
+        #{gdsApprove,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNo != null" >
+        #{sortNo,jdbcType=DECIMAL},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="taxId != null" >
+        #{taxId,jdbcType=DECIMAL},
+      </if>
+      <if test="gdsLabel != null" >
+        #{gdsLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="putonTime != null" >
+        #{putonTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putoffTime != null" >
+        #{putoffTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postTime != null" >
+        #{postTime,jdbcType=DECIMAL},
+      </if>
+      <if test="ifSendscore != null" >
+        #{ifSendscore,jdbcType=VARCHAR},
+      </if>
+      <if test="ifSalealone != null" >
+        #{ifSalealone,jdbcType=VARCHAR},
+      </if>
+      <if test="ifRecomm != null" >
+        #{ifRecomm,jdbcType=VARCHAR},
+      </if>
+      <if test="ifNew != null" >
+        #{ifNew,jdbcType=VARCHAR},
+      </if>
+      <if test="ifStocknotice != null" >
+        #{ifStocknotice,jdbcType=VARCHAR},
+      </if>
+      <if test="ifFree != null" >
+        #{ifFree,jdbcType=VARCHAR},
+      </if>
+      <if test="ifDisperseStock != null" >
+        #{ifDisperseStock,jdbcType=VARCHAR},
+      </if>
+      <if test="ifLadderPrice != null" >
+        #{ifLadderPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ifEntityCode != null" >
+        #{ifEntityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ifSeniorPrice != null" >
+        #{ifSeniorPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ifScoreGds != null" >
+        #{ifScoreGds,jdbcType=VARCHAR},
+      </if>
+      <if test="shipTemplateId != null" >
+        #{shipTemplateId,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=DECIMAL},
+      </if>
+      <if test="platCatgs != null" >
+        #{platCatgs,jdbcType=VARCHAR},
+      </if>
+      <if test="shopCatgs != null" >
+        #{shopCatgs,jdbcType=VARCHAR},
+      </if>
+      <if test="mainCatgs != null" >
+        #{mainCatgs,jdbcType=VARCHAR},
+      </if>
+      <if test="catlogId != null" >
+        #{catlogId,jdbcType=DECIMAL},
+      </if>
+      <if test="isbn != null" >
+        #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null" >
+        #{createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null" >
+        #{updateStaff,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jerry.frame.demo.model.common.gds.GdsSkuInfoExample" resultType="java.lang.Integer" >
+    select count(*) from T_GDS_SKU_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_GDS_SKU_INFO
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.snapId != null" >
+        SNAP_ID = #{record.snapId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.skuProps != null" >
+        SKU_PROPS = #{record.skuProps,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdsId != null" >
+        GDS_ID = #{record.gdsId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gdsName != null" >
+        GDS_NAME = #{record.gdsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdsSubHead != null" >
+        GDS_SUB_HEAD = #{record.gdsSubHead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuPrice != null" >
+        SKU_PRICE = #{record.skuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.guidePrice != null" >
+        GUIDE_PRICE = #{record.guidePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gdsDesc != null" >
+        GDS_DESC = #{record.gdsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdsPartlist != null" >
+        GDS_PARTLIST = #{record.gdsPartlist,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdsTypeId != null" >
+        GDS_TYPE_ID = #{record.gdsTypeId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gdsStatus != null" >
+        GDS_STATUS = #{record.gdsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdsApprove != null" >
+        GDS_APPROVE = #{record.gdsApprove,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortNo != null" >
+        SORT_NO = #{record.sortNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shopId != null" >
+        SHOP_ID = #{record.shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.taxId != null" >
+        TAX_ID = #{record.taxId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gdsLabel != null" >
+        GDS_LABEL = #{record.gdsLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.putonTime != null" >
+        PUTON_TIME = #{record.putonTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.putoffTime != null" >
+        PUTOFF_TIME = #{record.putoffTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.postTime != null" >
+        POST_TIME = #{record.postTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ifSendscore != null" >
+        IF_SENDSCORE = #{record.ifSendscore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifSalealone != null" >
+        IF_SALEALONE = #{record.ifSalealone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifRecomm != null" >
+        IF_RECOMM = #{record.ifRecomm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifNew != null" >
+        IF_NEW = #{record.ifNew,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifStocknotice != null" >
+        IF_STOCKNOTICE = #{record.ifStocknotice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifFree != null" >
+        IF_FREE = #{record.ifFree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifDisperseStock != null" >
+        IF_DISPERSE_STOCK = #{record.ifDisperseStock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifLadderPrice != null" >
+        IF_LADDER_PRICE = #{record.ifLadderPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifEntityCode != null" >
+        IF_ENTITY_CODE = #{record.ifEntityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifSeniorPrice != null" >
+        IF_SENIOR_PRICE = #{record.ifSeniorPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifScoreGds != null" >
+        IF_SCORE_GDS = #{record.ifScoreGds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipTemplateId != null" >
+        SHIP_TEMPLATE_ID = #{record.shipTemplateId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.supplierId != null" >
+        SUPPLIER_ID = #{record.supplierId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.platCatgs != null" >
+        PLAT_CATGS = #{record.platCatgs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopCatgs != null" >
+        SHOP_CATGS = #{record.shopCatgs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainCatgs != null" >
+        MAIN_CATGS = #{record.mainCatgs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catlogId != null" >
+        CATLOG_ID = #{record.catlogId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isbn != null" >
+        ISBN = #{record.isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createStaff != null" >
+        CREATE_STAFF = #{record.createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateStaff != null" >
+        UPDATE_STAFF = #{record.updateStaff,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_GDS_SKU_INFO
+    set ID = #{record.id,jdbcType=DECIMAL},
+      SNAP_ID = #{record.snapId,jdbcType=DECIMAL},
+      SKU_PROPS = #{record.skuProps,jdbcType=VARCHAR},
+      GDS_ID = #{record.gdsId,jdbcType=DECIMAL},
+      GDS_NAME = #{record.gdsName,jdbcType=VARCHAR},
+      GDS_SUB_HEAD = #{record.gdsSubHead,jdbcType=VARCHAR},
+      SKU_PRICE = #{record.skuPrice,jdbcType=DECIMAL},
+      GUIDE_PRICE = #{record.guidePrice,jdbcType=DECIMAL},
+      GDS_DESC = #{record.gdsDesc,jdbcType=VARCHAR},
+      GDS_PARTLIST = #{record.gdsPartlist,jdbcType=VARCHAR},
+      GDS_TYPE_ID = #{record.gdsTypeId,jdbcType=DECIMAL},
+      GDS_STATUS = #{record.gdsStatus,jdbcType=VARCHAR},
+      GDS_APPROVE = #{record.gdsApprove,jdbcType=VARCHAR},
+      URL = #{record.url,jdbcType=VARCHAR},
+      SORT_NO = #{record.sortNo,jdbcType=DECIMAL},
+      SHOP_ID = #{record.shopId,jdbcType=DECIMAL},
+      TAX_ID = #{record.taxId,jdbcType=DECIMAL},
+      GDS_LABEL = #{record.gdsLabel,jdbcType=VARCHAR},
+      PUTON_TIME = #{record.putonTime,jdbcType=TIMESTAMP},
+      PUTOFF_TIME = #{record.putoffTime,jdbcType=TIMESTAMP},
+      POST_TIME = #{record.postTime,jdbcType=DECIMAL},
+      IF_SENDSCORE = #{record.ifSendscore,jdbcType=VARCHAR},
+      IF_SALEALONE = #{record.ifSalealone,jdbcType=VARCHAR},
+      IF_RECOMM = #{record.ifRecomm,jdbcType=VARCHAR},
+      IF_NEW = #{record.ifNew,jdbcType=VARCHAR},
+      IF_STOCKNOTICE = #{record.ifStocknotice,jdbcType=VARCHAR},
+      IF_FREE = #{record.ifFree,jdbcType=VARCHAR},
+      IF_DISPERSE_STOCK = #{record.ifDisperseStock,jdbcType=VARCHAR},
+      IF_LADDER_PRICE = #{record.ifLadderPrice,jdbcType=VARCHAR},
+      IF_ENTITY_CODE = #{record.ifEntityCode,jdbcType=VARCHAR},
+      IF_SENIOR_PRICE = #{record.ifSeniorPrice,jdbcType=VARCHAR},
+      IF_SCORE_GDS = #{record.ifScoreGds,jdbcType=VARCHAR},
+      SHIP_TEMPLATE_ID = #{record.shipTemplateId,jdbcType=DECIMAL},
+      SUPPLIER_ID = #{record.supplierId,jdbcType=DECIMAL},
+      PLAT_CATGS = #{record.platCatgs,jdbcType=VARCHAR},
+      SHOP_CATGS = #{record.shopCatgs,jdbcType=VARCHAR},
+      MAIN_CATGS = #{record.mainCatgs,jdbcType=VARCHAR},
+      CATLOG_ID = #{record.catlogId,jdbcType=DECIMAL},
+      ISBN = #{record.isbn,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_STAFF = #{record.createStaff,jdbcType=DECIMAL},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      UPDATE_STAFF = #{record.updateStaff,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jerry.frame.demo.model.common.gds.GdsSkuInfo" >
+    update T_GDS_SKU_INFO
+    <set >
+      <if test="snapId != null" >
+        SNAP_ID = #{snapId,jdbcType=DECIMAL},
+      </if>
+      <if test="skuProps != null" >
+        SKU_PROPS = #{skuProps,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsId != null" >
+        GDS_ID = #{gdsId,jdbcType=DECIMAL},
+      </if>
+      <if test="gdsName != null" >
+        GDS_NAME = #{gdsName,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsSubHead != null" >
+        GDS_SUB_HEAD = #{gdsSubHead,jdbcType=VARCHAR},
+      </if>
+      <if test="skuPrice != null" >
+        SKU_PRICE = #{skuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="guidePrice != null" >
+        GUIDE_PRICE = #{guidePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="gdsDesc != null" >
+        GDS_DESC = #{gdsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsPartlist != null" >
+        GDS_PARTLIST = #{gdsPartlist,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsTypeId != null" >
+        GDS_TYPE_ID = #{gdsTypeId,jdbcType=DECIMAL},
+      </if>
+      <if test="gdsStatus != null" >
+        GDS_STATUS = #{gdsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsApprove != null" >
+        GDS_APPROVE = #{gdsApprove,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNo != null" >
+        SORT_NO = #{sortNo,jdbcType=DECIMAL},
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID = #{shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="taxId != null" >
+        TAX_ID = #{taxId,jdbcType=DECIMAL},
+      </if>
+      <if test="gdsLabel != null" >
+        GDS_LABEL = #{gdsLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="putonTime != null" >
+        PUTON_TIME = #{putonTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putoffTime != null" >
+        PUTOFF_TIME = #{putoffTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postTime != null" >
+        POST_TIME = #{postTime,jdbcType=DECIMAL},
+      </if>
+      <if test="ifSendscore != null" >
+        IF_SENDSCORE = #{ifSendscore,jdbcType=VARCHAR},
+      </if>
+      <if test="ifSalealone != null" >
+        IF_SALEALONE = #{ifSalealone,jdbcType=VARCHAR},
+      </if>
+      <if test="ifRecomm != null" >
+        IF_RECOMM = #{ifRecomm,jdbcType=VARCHAR},
+      </if>
+      <if test="ifNew != null" >
+        IF_NEW = #{ifNew,jdbcType=VARCHAR},
+      </if>
+      <if test="ifStocknotice != null" >
+        IF_STOCKNOTICE = #{ifStocknotice,jdbcType=VARCHAR},
+      </if>
+      <if test="ifFree != null" >
+        IF_FREE = #{ifFree,jdbcType=VARCHAR},
+      </if>
+      <if test="ifDisperseStock != null" >
+        IF_DISPERSE_STOCK = #{ifDisperseStock,jdbcType=VARCHAR},
+      </if>
+      <if test="ifLadderPrice != null" >
+        IF_LADDER_PRICE = #{ifLadderPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ifEntityCode != null" >
+        IF_ENTITY_CODE = #{ifEntityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ifSeniorPrice != null" >
+        IF_SENIOR_PRICE = #{ifSeniorPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ifScoreGds != null" >
+        IF_SCORE_GDS = #{ifScoreGds,jdbcType=VARCHAR},
+      </if>
+      <if test="shipTemplateId != null" >
+        SHIP_TEMPLATE_ID = #{shipTemplateId,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID = #{supplierId,jdbcType=DECIMAL},
+      </if>
+      <if test="platCatgs != null" >
+        PLAT_CATGS = #{platCatgs,jdbcType=VARCHAR},
+      </if>
+      <if test="shopCatgs != null" >
+        SHOP_CATGS = #{shopCatgs,jdbcType=VARCHAR},
+      </if>
+      <if test="mainCatgs != null" >
+        MAIN_CATGS = #{mainCatgs,jdbcType=VARCHAR},
+      </if>
+      <if test="catlogId != null" >
+        CATLOG_ID = #{catlogId,jdbcType=DECIMAL},
+      </if>
+      <if test="isbn != null" >
+        ISBN = #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null" >
+        CREATE_STAFF = #{createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null" >
+        UPDATE_STAFF = #{updateStaff,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jerry.frame.demo.model.common.gds.GdsSkuInfo" >
+    update T_GDS_SKU_INFO
+    set SNAP_ID = #{snapId,jdbcType=DECIMAL},
+      SKU_PROPS = #{skuProps,jdbcType=VARCHAR},
+      GDS_ID = #{gdsId,jdbcType=DECIMAL},
+      GDS_NAME = #{gdsName,jdbcType=VARCHAR},
+      GDS_SUB_HEAD = #{gdsSubHead,jdbcType=VARCHAR},
+      SKU_PRICE = #{skuPrice,jdbcType=DECIMAL},
+      GUIDE_PRICE = #{guidePrice,jdbcType=DECIMAL},
+      GDS_DESC = #{gdsDesc,jdbcType=VARCHAR},
+      GDS_PARTLIST = #{gdsPartlist,jdbcType=VARCHAR},
+      GDS_TYPE_ID = #{gdsTypeId,jdbcType=DECIMAL},
+      GDS_STATUS = #{gdsStatus,jdbcType=VARCHAR},
+      GDS_APPROVE = #{gdsApprove,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      SORT_NO = #{sortNo,jdbcType=DECIMAL},
+      SHOP_ID = #{shopId,jdbcType=DECIMAL},
+      TAX_ID = #{taxId,jdbcType=DECIMAL},
+      GDS_LABEL = #{gdsLabel,jdbcType=VARCHAR},
+      PUTON_TIME = #{putonTime,jdbcType=TIMESTAMP},
+      PUTOFF_TIME = #{putoffTime,jdbcType=TIMESTAMP},
+      POST_TIME = #{postTime,jdbcType=DECIMAL},
+      IF_SENDSCORE = #{ifSendscore,jdbcType=VARCHAR},
+      IF_SALEALONE = #{ifSalealone,jdbcType=VARCHAR},
+      IF_RECOMM = #{ifRecomm,jdbcType=VARCHAR},
+      IF_NEW = #{ifNew,jdbcType=VARCHAR},
+      IF_STOCKNOTICE = #{ifStocknotice,jdbcType=VARCHAR},
+      IF_FREE = #{ifFree,jdbcType=VARCHAR},
+      IF_DISPERSE_STOCK = #{ifDisperseStock,jdbcType=VARCHAR},
+      IF_LADDER_PRICE = #{ifLadderPrice,jdbcType=VARCHAR},
+      IF_ENTITY_CODE = #{ifEntityCode,jdbcType=VARCHAR},
+      IF_SENIOR_PRICE = #{ifSeniorPrice,jdbcType=VARCHAR},
+      IF_SCORE_GDS = #{ifScoreGds,jdbcType=VARCHAR},
+      SHIP_TEMPLATE_ID = #{shipTemplateId,jdbcType=DECIMAL},
+      SUPPLIER_ID = #{supplierId,jdbcType=DECIMAL},
+      PLAT_CATGS = #{platCatgs,jdbcType=VARCHAR},
+      SHOP_CATGS = #{shopCatgs,jdbcType=VARCHAR},
+      MAIN_CATGS = #{mainCatgs,jdbcType=VARCHAR},
+      CATLOG_ID = #{catlogId,jdbcType=DECIMAL},
+      ISBN = #{isbn,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_STAFF = #{createStaff,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_STAFF = #{updateStaff,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <insert id="insertBatch" parameterType="com.jerry.frame.demo.model.common.gds.GdsSkuInfo" >
+    insert into T_GDS_SKU_INFO (ID, 
+      SNAP_ID, SKU_PROPS, GDS_ID, 
+      GDS_NAME, GDS_SUB_HEAD, SKU_PRICE, 
+      GUIDE_PRICE, GDS_DESC, GDS_PARTLIST, 
+      GDS_TYPE_ID, GDS_STATUS, GDS_APPROVE, 
+      URL, SORT_NO, SHOP_ID, 
+      TAX_ID, GDS_LABEL, PUTON_TIME, 
+      PUTOFF_TIME, POST_TIME, IF_SENDSCORE, 
+      IF_SALEALONE, IF_RECOMM, IF_NEW, 
+      IF_STOCKNOTICE, IF_FREE, IF_DISPERSE_STOCK, 
+      IF_LADDER_PRICE, IF_ENTITY_CODE, 
+      IF_SENIOR_PRICE, IF_SCORE_GDS, SHIP_TEMPLATE_ID, 
+      SUPPLIER_ID, PLAT_CATGS, SHOP_CATGS, 
+      MAIN_CATGS, CATLOG_ID, ISBN, 
+      CREATE_TIME, CREATE_STAFF, UPDATE_TIME, 
+      UPDATE_STAFF)
+    values <foreach collection="list" item="item" index="index" separator="," > (#{item.id,jdbcType=DECIMAL}, 
+      #{item.snapId,jdbcType=DECIMAL}, #{item.skuProps,jdbcType=VARCHAR}, #{item.gdsId,jdbcType=DECIMAL}, 
+      #{item.gdsName,jdbcType=VARCHAR}, #{item.gdsSubHead,jdbcType=VARCHAR}, #{item.skuPrice,jdbcType=DECIMAL}, 
+      #{item.guidePrice,jdbcType=DECIMAL}, #{item.gdsDesc,jdbcType=VARCHAR}, #{item.gdsPartlist,jdbcType=VARCHAR}, 
+      #{item.gdsTypeId,jdbcType=DECIMAL}, #{item.gdsStatus,jdbcType=VARCHAR}, #{item.gdsApprove,jdbcType=VARCHAR}, 
+      #{item.url,jdbcType=VARCHAR}, #{item.sortNo,jdbcType=DECIMAL}, #{item.shopId,jdbcType=DECIMAL}, 
+      #{item.taxId,jdbcType=DECIMAL}, #{item.gdsLabel,jdbcType=VARCHAR}, #{item.putonTime,jdbcType=TIMESTAMP}, 
+      #{item.putoffTime,jdbcType=TIMESTAMP}, #{item.postTime,jdbcType=DECIMAL}, #{item.ifSendscore,jdbcType=VARCHAR}, 
+      #{item.ifSalealone,jdbcType=VARCHAR}, #{item.ifRecomm,jdbcType=VARCHAR}, #{item.ifNew,jdbcType=VARCHAR}, 
+      #{item.ifStocknotice,jdbcType=VARCHAR}, #{item.ifFree,jdbcType=VARCHAR}, #{item.ifDisperseStock,jdbcType=VARCHAR}, 
+      #{item.ifLadderPrice,jdbcType=VARCHAR}, #{item.ifEntityCode,jdbcType=VARCHAR}, 
+      #{item.ifSeniorPrice,jdbcType=VARCHAR}, #{item.ifScoreGds,jdbcType=VARCHAR}, #{item.shipTemplateId,jdbcType=DECIMAL}, 
+      #{item.supplierId,jdbcType=DECIMAL}, #{item.platCatgs,jdbcType=VARCHAR}, #{item.shopCatgs,jdbcType=VARCHAR}, 
+      #{item.mainCatgs,jdbcType=VARCHAR}, #{item.catlogId,jdbcType=DECIMAL}, #{item.isbn,jdbcType=VARCHAR}, 
+      #{item.createTime,jdbcType=TIMESTAMP}, #{item.createStaff,jdbcType=DECIMAL}, #{item.updateTime,jdbcType=TIMESTAMP}, 
+      #{item.updateStaff,jdbcType=DECIMAL})</foreach>
+  </insert>
+</mapper>

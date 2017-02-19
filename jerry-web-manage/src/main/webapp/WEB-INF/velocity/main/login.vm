@@ -1,0 +1,8 @@
+
+<form action="/jerry-web-manage/j_spring_cas_security_check" method="post">
+<table>
+<tr><td>用户名：</td><td><input name="j_username" type="text"/></td> </tr>
+<tr><td>密码：</td><td><input name="j_password" type="password"/></td> </tr>
+<tr><td></td><td><input value="提交" type="submit"/></td> </tr>
+</table>
+</form>

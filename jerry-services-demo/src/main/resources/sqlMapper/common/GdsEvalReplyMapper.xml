@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jerry.frame.demo.dao.common.gds.GdsEvalReplyMapper" >
+  <resultMap id="BaseResultMap" type="com.jerry.frame.demo.model.common.gds.GdsEvalReply" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="EVAL_ID" property="evalId" jdbcType="DECIMAL" />
+    <result column="REPLY_ID" property="replyId" jdbcType="DECIMAL" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="GDS_ID" property="gdsId" jdbcType="DECIMAL" />
+    <result column="SHOP_ID" property="shopId" jdbcType="DECIMAL" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="ORDER_SUB_ID" property="orderSubId" jdbcType="VARCHAR" />
+    <result column="REPLY_TYPE" property="replyType" jdbcType="VARCHAR" />
+    <result column="STAFF_ID" property="staffId" jdbcType="DECIMAL" />
+    <result column="REPLAY_TIME" property="replayTime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_STAFF" property="createStaff" jdbcType="DECIMAL" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_STAFF" property="updateStaff" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, EVAL_ID, REPLY_ID, CONTENT, GDS_ID, SHOP_ID, ORDER_ID, ORDER_SUB_ID, REPLY_TYPE, 
+    STAFF_ID, REPLAY_TIME, STATUS, CREATE_TIME, CREATE_STAFF, UPDATE_TIME, UPDATE_STAFF
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jerry.frame.demo.model.common.gds.GdsEvalReplyExample" >
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       select * from (select t_1.*,rownum as row_num from (
+    </if>
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_GDS_EVAL_REPLY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       <![CDATA[ ) t_1 where rownum<=#{limitClauseCount,jdbcType=INTEGER} + #{limitClauseStart,jdbcType=INTEGER}) t_2 where t_2.row_num>#{limitClauseStart,jdbcType=INTEGER}]]>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_GDS_EVAL_REPLY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_GDS_EVAL_REPLY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jerry.frame.demo.model.common.gds.GdsEvalReplyExample" >
+    delete from T_GDS_EVAL_REPLY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jerry.frame.demo.model.common.gds.GdsEvalReply" >
+    insert into T_GDS_EVAL_REPLY (ID, EVAL_ID, REPLY_ID, 
+      CONTENT, GDS_ID, SHOP_ID, 
+      ORDER_ID, ORDER_SUB_ID, REPLY_TYPE, 
+      STAFF_ID, REPLAY_TIME, STATUS, 
+      CREATE_TIME, CREATE_STAFF, UPDATE_TIME, 
+      UPDATE_STAFF)
+    values (#{id,jdbcType=DECIMAL}, #{evalId,jdbcType=DECIMAL}, #{replyId,jdbcType=DECIMAL}, 
+      #{content,jdbcType=VARCHAR}, #{gdsId,jdbcType=DECIMAL}, #{shopId,jdbcType=DECIMAL}, 
+      #{orderId,jdbcType=VARCHAR}, #{orderSubId,jdbcType=VARCHAR}, #{replyType,jdbcType=VARCHAR}, 
+      #{staffId,jdbcType=DECIMAL}, #{replayTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createStaff,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateStaff,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jerry.frame.demo.model.common.gds.GdsEvalReply" >
+    insert into T_GDS_EVAL_REPLY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="evalId != null" >
+        EVAL_ID,
+      </if>
+      <if test="replyId != null" >
+        REPLY_ID,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="gdsId != null" >
+        GDS_ID,
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="orderSubId != null" >
+        ORDER_SUB_ID,
+      </if>
+      <if test="replyType != null" >
+        REPLY_TYPE,
+      </if>
+      <if test="staffId != null" >
+        STAFF_ID,
+      </if>
+      <if test="replayTime != null" >
+        REPLAY_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createStaff != null" >
+        CREATE_STAFF,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="updateStaff != null" >
+        UPDATE_STAFF,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="evalId != null" >
+        #{evalId,jdbcType=DECIMAL},
+      </if>
+      <if test="replyId != null" >
+        #{replyId,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsId != null" >
+        #{gdsId,jdbcType=DECIMAL},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSubId != null" >
+        #{orderSubId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyType != null" >
+        #{replyType,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="replayTime != null" >
+        #{replayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null" >
+        #{createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null" >
+        #{updateStaff,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jerry.frame.demo.model.common.gds.GdsEvalReplyExample" resultType="java.lang.Integer" >
+    select count(*) from T_GDS_EVAL_REPLY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_GDS_EVAL_REPLY
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.evalId != null" >
+        EVAL_ID = #{record.evalId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.replyId != null" >
+        REPLY_ID = #{record.replyId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdsId != null" >
+        GDS_ID = #{record.gdsId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shopId != null" >
+        SHOP_ID = #{record.shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderId != null" >
+        ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderSubId != null" >
+        ORDER_SUB_ID = #{record.orderSubId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyType != null" >
+        REPLY_TYPE = #{record.replyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffId != null" >
+        STAFF_ID = #{record.staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.replayTime != null" >
+        REPLAY_TIME = #{record.replayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createStaff != null" >
+        CREATE_STAFF = #{record.createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateStaff != null" >
+        UPDATE_STAFF = #{record.updateStaff,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_GDS_EVAL_REPLY
+    set ID = #{record.id,jdbcType=DECIMAL},
+      EVAL_ID = #{record.evalId,jdbcType=DECIMAL},
+      REPLY_ID = #{record.replyId,jdbcType=DECIMAL},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      GDS_ID = #{record.gdsId,jdbcType=DECIMAL},
+      SHOP_ID = #{record.shopId,jdbcType=DECIMAL},
+      ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      ORDER_SUB_ID = #{record.orderSubId,jdbcType=VARCHAR},
+      REPLY_TYPE = #{record.replyType,jdbcType=VARCHAR},
+      STAFF_ID = #{record.staffId,jdbcType=DECIMAL},
+      REPLAY_TIME = #{record.replayTime,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_STAFF = #{record.createStaff,jdbcType=DECIMAL},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      UPDATE_STAFF = #{record.updateStaff,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jerry.frame.demo.model.common.gds.GdsEvalReply" >
+    update T_GDS_EVAL_REPLY
+    <set >
+      <if test="evalId != null" >
+        EVAL_ID = #{evalId,jdbcType=DECIMAL},
+      </if>
+      <if test="replyId != null" >
+        REPLY_ID = #{replyId,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsId != null" >
+        GDS_ID = #{gdsId,jdbcType=DECIMAL},
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID = #{shopId,jdbcType=DECIMAL},
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSubId != null" >
+        ORDER_SUB_ID = #{orderSubId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyType != null" >
+        REPLY_TYPE = #{replyType,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        STAFF_ID = #{staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="replayTime != null" >
+        REPLAY_TIME = #{replayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null" >
+        CREATE_STAFF = #{createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null" >
+        UPDATE_STAFF = #{updateStaff,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jerry.frame.demo.model.common.gds.GdsEvalReply" >
+    update T_GDS_EVAL_REPLY
+    set EVAL_ID = #{evalId,jdbcType=DECIMAL},
+      REPLY_ID = #{replyId,jdbcType=DECIMAL},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      GDS_ID = #{gdsId,jdbcType=DECIMAL},
+      SHOP_ID = #{shopId,jdbcType=DECIMAL},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      ORDER_SUB_ID = #{orderSubId,jdbcType=VARCHAR},
+      REPLY_TYPE = #{replyType,jdbcType=VARCHAR},
+      STAFF_ID = #{staffId,jdbcType=DECIMAL},
+      REPLAY_TIME = #{replayTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_STAFF = #{createStaff,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_STAFF = #{updateStaff,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <insert id="insertBatch" parameterType="com.jerry.frame.demo.model.common.gds.GdsEvalReply" >
+    insert into T_GDS_EVAL_REPLY (ID, 
+      EVAL_ID, REPLY_ID, CONTENT, 
+      GDS_ID, SHOP_ID, ORDER_ID, 
+      ORDER_SUB_ID, REPLY_TYPE, STAFF_ID, 
+      REPLAY_TIME, STATUS, CREATE_TIME, 
+      CREATE_STAFF, UPDATE_TIME, UPDATE_STAFF
+      )
+    values <foreach collection="list" item="item" index="index" separator="," > (#{item.id,jdbcType=DECIMAL}, 
+      #{item.evalId,jdbcType=DECIMAL}, #{item.replyId,jdbcType=DECIMAL}, #{item.content,jdbcType=VARCHAR}, 
+      #{item.gdsId,jdbcType=DECIMAL}, #{item.shopId,jdbcType=DECIMAL}, #{item.orderId,jdbcType=VARCHAR}, 
+      #{item.orderSubId,jdbcType=VARCHAR}, #{item.replyType,jdbcType=VARCHAR}, #{item.staffId,jdbcType=DECIMAL}, 
+      #{item.replayTime,jdbcType=TIMESTAMP}, #{item.status,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
+      #{item.createStaff,jdbcType=DECIMAL}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateStaff,jdbcType=DECIMAL}
+      )</foreach>
+  </insert>
+</mapper>

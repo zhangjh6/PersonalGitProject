@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<properties resource="init-config.properties" />
+	<context id="context">
+
+		<property name="javaFileEncoding" value="UTF-8" />
+		<property name="DBType" value="oracle"></property>
+	<!-- 	<property name="mergeable" value="false"></property> -->
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+		<!-- 生成分页查询 -->
+		<plugin type="com.jerry.frame.mbg.plugins.OraclePaginationPlugin">
+			<property name="rootClass" value="com.jerry.frame.mbg.plugins.BaseExample" />
+		</plugin>
+		
+		<!-- 批量插入数据 -->
+    <plugin type="com.jerry.frame.mbg.plugins.BatchInsertPlugin"></plugin>
+   
+		<!-- 修改生成代码的格式 -->
+		<!-- <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin"> 
+			<property name="searchString" value="Example$" /> <property name="replaceString" 
+			value="Criteria" /> </plugin> -->
+
+		<!-- 自定义数据库字段长度转换java类型 -->
+		<javaTypeResolver
+			type="com.jerry.frame.mbg.plugins.JavaTypeResolverDefaultImpl">
+			<!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<plugin type="org.mybatis.generator.plugins.VirtualPrimaryKeyPlugin" />
+		<jdbcConnection driverClass="${driverClass}"
+			connectionURL="${connectionURL}" userId="${userId}" password="${password}" />
+		<javaModelGenerator targetPackage="${model.targetPackage}"
+			targetProject="${model.targetProject}" />
+		<sqlMapGenerator targetPackage="${sqlMapper.targetPackage}"
+			targetProject="${sqlMapper.targetProject}" />
+		<javaClientGenerator targetPackage="${dao.targetPackage}"
+			targetProject="${dao.targetProject}" type="XMLMAPPER" />
+		<table schema="${table.schema}" tableName="T_MALL_USER"
+			domainObjectName="MallUser">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="${table.schema}" tableName="T_GDS_CATG2PROP"
+			domainObjectName="GdsCatg2Prop">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="${table.schema}" tableName="T_GDS_CATG2SITE"
+			domainObjectName="GdsCatg2Site">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="${table.schema}" tableName="T_GDS_CATEGORY"
+			domainObjectName="GdsCategory">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="${table.schema}" tableName="T_GDS_PROP2GROUP"
+			domainObjectName="GdsProp2Group">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		
+		<table schema="${table.schema}" tableName="T_GDS_PROP_VALUE"
+			domainObjectName="GdsPropValue">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="${table.schema}" tableName="T_GDS_PROP_GROUP"
+			domainObjectName="GdsPropGroup">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		
+		<table schema="${table.schema}" tableName="T_GDS_PROP"
+			domainObjectName="GdsProp">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="${table.schema}" tableName="T_GDS_TYPE2PROP"
+			domainObjectName="GdsType2Prop">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="${table.schema}" tableName="T_GDS_INFO"
+			domainObjectName="GdsInfo">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="${table.schema}" tableName="T_GDS_GDS2PROP"
+			domainObjectName="GdsGds2Prop">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="${table.schema}" tableName="T_GDS_EVAL_REPLY"
+			domainObjectName="GdsEvalReply">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="${table.schema}" tableName="T_GDS_EVAL"
+			domainObjectName="GdsEval">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		
+		<table schema="${table.schema}" tableName="T_GDS_SKU_INFO"
+			domainObjectName="GdsSkuInfo">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		
+		<table schema="${table.schema}" tableName="T_GDS_SKU2PROP"
+			domainObjectName="GdsSku2Prop">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		<table schema="${table.schema}" tableName="T_GDS_TYPE"
+			domainObjectName="GdsType">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+		
+			<table schema="${table.schema}" tableName="T_CMS_SITE"
+			domainObjectName="CmsSite">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+			<table schema="${table.schema}" tableName="T_GDS_SHOP2CATG"
+			domainObjectName="GdsShop2Catg">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="jerry-web-manage:ear exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/jerry_web_manage_ear_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="jerry-web-manage/javaeeApplication/javaEEApplication" />
+    </root>
+  </artifact>
+</component>

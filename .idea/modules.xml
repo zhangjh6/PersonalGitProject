@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/PersonalGitProject.iml" filepath="$PROJECT_DIR$/PersonalGitProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jerry-services/jerry-services.iml" filepath="$PROJECT_DIR$/jerry-services/jerry-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jerry-services-demo/jerry-services-demo.iml" filepath="$PROJECT_DIR$/jerry-services-demo/jerry-services-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jerry-web/jerry-web.iml" filepath="$PROJECT_DIR$/jerry-web/jerry-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jerry-web-manage/jerry-web-manage.iml" filepath="$PROJECT_DIR$/jerry-web-manage/jerry-web-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mybatis-generator-extern/mybatis-generator-extern.iml" filepath="$PROJECT_DIR$/mybatis-generator-extern/mybatis-generator-extern.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mybatis_generator_tool/mybatis_generator_tool.iml" filepath="$PROJECT_DIR$/mybatis_generator_tool/mybatis_generator_tool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packaging-parent/packaging-parent.iml" filepath="$PROJECT_DIR$/packaging-parent/packaging-parent.iml" />
+    </modules>
+  </component>
+</project>

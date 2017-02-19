@@ -1,0 +1,99 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd">
+	<http use-expressions="true"
+		entry-point-ref="casProcessingFilterEntryPoint" >
+		<csrf disabled="true" />
+
+		<custom-filter ref="casFilter" position="CAS_FILTER" />
+	
+		<intercept-url pattern="/*" access="isAuthenticated()" />
+
+		<session-management session-fixation-protection="migrateSession">
+			<concurrency-control session-registry-ref="sessionRegistry"
+				max-sessions="1" error-if-maximum-exceeded="false" expired-url="/castimeout" />
+		</session-management>
+	</http>
+	<!-- <user-service id="userServiceWrapper"> <user name="guest" password="guest" 
+		authorities="ROLE_USER, ROLE_ADMIN" /> <user name="user" password="user" 
+		authorities="ROLE_USER, ROLE_ADMIN" /> </user-service> -->
+
+	<!-- <authentication-manager> <authentication-provider user-service-ref='userServiceWrapper' 
+		/> </authentication-manager> -->
+
+	<beans:bean class="com.jerry.web.manage.authenticate.UserDetailServiceImpl"
+		id="userDetailServiceWrapper"  >
+		<beans:property name="userServiceRSV" ref="userServiceRSV"></beans:property>
+		</beans:bean>
+	<beans:bean id="serviceProperties"
+		class="org.springframework.security.cas.ServiceProperties">
+		<beans:property name="service" value="${platform.url}" />
+		<beans:property name="sendRenew" value="false" />
+	</beans:bean>
+
+	<beans:bean id="casAuthenticationProvider"
+		class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
+		<beans:property name="userDetailsService" ref="userDetailServiceWrapper" />
+		<beans:property name="serviceProperties" ref="serviceProperties" />
+		<beans:property name="ticketValidator">
+			<beans:bean
+				class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
+				<beans:constructor-arg index="0"
+					value="${cas.validate.url}" />
+			</beans:bean>
+		</beans:property>
+		<beans:property name="key"
+			value="an_id_for_this_auth_provider_only" />
+	</beans:bean>
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="casAuthenticationProvider" />
+	</authentication-manager>
+
+	<beans:bean id="casFilter"
+		class="org.springframework.security.cas.web.CasAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="filterProcessesUrl" value="/j_spring_cas_security_check"></beans:property>
+		<!-- <beans:property name="sessionAuthenticationStrategy" ref="sessionAuthenticationStrategy" 
+			/> -->
+	</beans:bean>
+
+	<beans:bean id="sessionAuthenticationStrategy"
+		class="org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy">
+		<beans:constructor-arg>
+			<beans:list>
+				<beans:bean
+					class="org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy">
+					<beans:constructor-arg ref="sessionRegistry" />
+					<beans:property name="maximumSessions" value="1" />
+					<beans:property name="exceptionIfMaximumExceeded"
+						value="false" />
+				</beans:bean>
+				<beans:bean
+					class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy"></beans:bean>
+				<beans:bean
+					class="org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy">
+					<beans:constructor-arg ref="sessionRegistry" />
+				</beans:bean>
+			</beans:list>
+		</beans:constructor-arg>
+	</beans:bean>
+
+	<beans:bean id="sessionRegistry"
+		class="org.springframework.security.core.session.SessionRegistryImpl" />
+
+	<beans:bean id="casProcessingFilterEntryPoint"
+		class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
+
+		<beans:property name="loginUrl" value="${cas.url}" />
+		<beans:property name="serviceProperties" ref="serviceProperties" />
+	</beans:bean>
+
+
+
+
+</beans:beans>
+

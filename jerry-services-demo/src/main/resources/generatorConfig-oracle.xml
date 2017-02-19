@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<properties resource="init-config.properties" />
+	<context id="context">
+		<property name="javaFileEncoding" value="UTF-8" />
+		<property name="DBType" value="oracle"></property>
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Criteria" />
+		</plugin>
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<plugin type="org.mybatis.generator.plugins.VirtualPrimaryKeyPlugin" />
+		<jdbcConnection driverClass="${driverClass}"
+			 connectionURL="${connectionURL}" userId="" password="${password}" />
+		<javaModelGenerator targetPackage="${model.targetPackage}"
+			targetProject="${model.targetProject}" />
+		<sqlMapGenerator targetPackage="${sqlMapper.targetPackage}"
+			targetProject="${sqlMapper.targetProject}" />
+		<javaClientGenerator targetPackage="${dao.targetPackage}"
+			targetProject="${dao.targetProject}" type="XMLMAPPER" />
+		<table schema="${table.schema}" tableName="T_MALL_USER">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<!-- <property name="virtualKeyColumns" value="${table.keyColumn}" /> -->
+		</table>
+	</context>
+</generatorConfiguration>
