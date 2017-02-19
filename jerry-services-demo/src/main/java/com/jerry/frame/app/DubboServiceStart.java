@@ -27,7 +27,7 @@ public class DubboServiceStart {
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-
+//测试git
 			}
 		}
 	}
